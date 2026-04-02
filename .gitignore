@@ -1,0 +1,39 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Temp / runtime files
+tmp_*.png
+tmp_*.jpg
+*.tmp
+
+# macOS
+.DS_Store
+
+# Datasets (large — not tracked)
+7812323/
+archive/
+newarchive/
+_archive/
+data/
+
+# YOLO training artefacts — keep best.pt weights, ignore everything else
+runs/**/last.pt
+runs/**/*.csv
+runs/**/*.png
+runs/**/*.jpg
+runs/**/events.out*
+runs/**/train_batch*
+runs/**/val_batch*
+runs/**/confusion_matrix*
+runs/**/results*
+runs/**/labels*
+
+# Jupyter
+.ipynb_checkpoints/
