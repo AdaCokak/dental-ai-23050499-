@@ -55,36 +55,17 @@ Hover over any detection result image to hide the overlay and see the original X
 ## Key files
 
 ```
-app.py                              — Streamlit UI
+app.py                                           — Streamlit UI
+annotate.py                                      — annotation tool (used to label clinical films)
 src/dental_ai/
-  dentex_infer.py                   — YOLOv11 inference + colored mask rendering
-  extraction.py                     — tooth candidate extraction (for tooth-only mode)
-  train.py                          — generic YOLO training script
-configs/
-  dentex_disease.yaml               — V2 training config (yolo11s-seg, DENTEX)
-  dentex_v2_finetune.yaml           — fine-tuning config (lr=0.0001, freeze=5)
+  dentex_infer.py                                — YOLOv11 inference + colored mask rendering
+  extraction.py                                  — tooth candidate extraction (tooth-only mode)
+  train.py                                       — YOLO training script
 runs/segment/
-  dentex_disease_seg_v2/weights/best.pt    — V2 baseline weights
-  dentex_v2_finetuned/weights/best.pt      — fine-tuned weights (primary)
-  archive_tooth_seg/weights/best.pt        — tooth segmentation weights
-data/
-  dentex_disease/                   — YOLO seg format dataset (DENTEX, 577/101 split)
-  annotations_finetune/             — 49 annotated clinical films for fine-tuning
-archive/Teeth Segmentation JSON/d2/ — 598 panoramic images with tooth polygons
-```
-
-## Training
-
-### V2 baseline (DENTEX only)
-```bash
-source .venv/bin/activate
-python src/dental_ai/train.py --config configs/dentex_disease.yaml
-```
-
-### Fine-tuned model (V2 + 49 clinical films)
-```bash
-source .venv/bin/activate
-python src/dental_ai/train.py --config configs/dentex_v2_finetune.yaml
+  dentex_v2_finetuned/weights/best.pt            — fine-tuned weights (primary)
+  dentex_disease_seg_v2/weights/best.pt          — V2 baseline weights
+  archive_tooth_seg/weights/best.pt              — tooth segmentation weights
+TEST/                                            — 6 clinical X-rays for testing
 ```
 
 ## Disease classes
@@ -98,5 +79,4 @@ python src/dental_ai/train.py --config configs/dentex_v2_finetune.yaml
 
 ## Hardware
 
-Tested on Apple Silicon (MPS). Training uses `device: mps` in config.
-`amp: false` is required for MPS stability during fine-tuning.
+Tested on Apple Silicon (MPS). Works on any machine with PyTorch support (CPU, CUDA, MPS).
